@@ -20,6 +20,10 @@ func (i IOSStrings) AcceptFile(name string) bool {
 func (i IOSStrings) Write(c *Config, w io.Writer) {
 	for _, v := range c.data {
 		var item Item = v
-		fmt.Fprintf(w, "\"%v\" = \"%v\";\n", strings.Join(item.key, "."), item.value)
+		fmt.Fprintf(w, "\"%v\" = \"%v\";\n", strings.Join(item.key, "."), escape(string(item.value)))
 	}
+}
+
+func escape(s string) string {
+	return strings.Replace(s, "\"", "\\\"", -1)
 }
