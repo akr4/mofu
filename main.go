@@ -4,9 +4,10 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"net.physalis/mofu/lib"
 	"os"
 	"strings"
+
+	"github.com/akr4/mofu/lib"
 )
 
 func main() {
