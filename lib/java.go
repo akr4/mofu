@@ -18,8 +18,7 @@ func (j JavaProperties) AcceptFile(name string) bool {
 }
 
 func (j JavaProperties) Write(c *Config, w io.Writer) {
-	for _, v := range c.data {
-		var item Item = v
-		fmt.Fprintf(w, "%v = %v\n", strings.Join(item.key, "."), item.value)
+	for k, v := range c.data {
+		fmt.Fprintf(w, "%v = %v\n", strings.Join(NewKey(k), "."), v)
 	}
 }

@@ -26,7 +26,7 @@ func (y *Yaml) Read(r io.Reader) (*Config, error) {
 }
 
 func visit(key Key, t *tree) *Config {
-	c := new(Config)
+	c := NewConfig()
 	visitR(c, key, t)
 	return c
 }
@@ -40,8 +40,8 @@ func visitR(c *Config, key Key, t *tree) {
 			var tt tree = v.(tree)
 			visitR(c, key2, &tt)
 		case string:
-			var vv string = v.(string)
-			c.Put(key2, Value(vv))
+			var vv Value = Value(v.(string))
+			c.Put(&key2, &vv)
 		default:
 			fmt.Printf("unexpected: %v\n", v)
 		}
