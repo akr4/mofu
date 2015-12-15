@@ -25,7 +25,7 @@ func main() {
 
 	var inputFile = flag.String("i", "", "Input file")
 	var outputFile = flag.String("o", "", "Output file")
-	var outputFormat = flag.String("f", "", "(optional) Output format [" + strings.Join(identifiers, ", ") + "]")
+	var outputFormat = flag.String("f", "", "(optional) Output format ["+strings.Join(identifiers, ", ")+"]")
 	flag.Parse()
 
 	if len(*inputFile) < 1 || len(*outputFile) < 1 {
