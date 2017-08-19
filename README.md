@@ -6,7 +6,7 @@ A tool makes I18N strings files for multiple platforms from a definition file.
 - Java Properties
 - iOS/macOS Strings
 - Android Strings XML
-- JSON (can be used with Polygot for example)
+- JSON
 
 ## Prepare Definition File
 
