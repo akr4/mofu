@@ -1,4 +1,5 @@
 package mofu
+
 import "strings"
 
 type Key []string

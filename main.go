@@ -15,6 +15,7 @@ func main() {
 		mofu.JavaProperties{},
 		mofu.IOSStrings{},
 		mofu.AndroidStrings{},
+		mofu.Json{},
 	}
 
 	var identifiers []string
@@ -25,12 +26,12 @@ func main() {
 	}
 
 	var inputFile = flag.String("i", "", "Input file")
-	var outputFile = flag.String("o", "", "Output file")
+	var outputFile = flag.String("o", "", "(optional) Output file")
 	var outputFormat = flag.String("f", "", "(optional) Output format ["+strings.Join(identifiers, ", ")+"]")
-	var includes = flag.String("includes", "", "Output strings only for items which have the prefix.")
+	var includes = flag.String("includes", "", "(optional) Output strings only for items which have the prefix.")
 	flag.Parse()
 
-	if len(*inputFile) < 1 || len(*outputFile) < 1 {
+	if len(*inputFile) < 1 {
 		flag.Usage()
 		os.Exit(1)
 	}
@@ -46,7 +47,7 @@ func main() {
 		}
 	}
 
-	if writer == nil {
+	if writer == nil && len(*outputFile) > 0 {
 		for _, w := range writers {
 			if w.AcceptFile(*outputFile) {
 				writer = w
@@ -78,7 +79,10 @@ func main() {
 		config = filter(config, *includes)
 	}
 
-	out, err := os.OpenFile(*outputFile, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	out, err := os.Stdout, error(nil)
+	if len(*outputFile) > 0 {
+		out, err = os.OpenFile(*outputFile, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	}
 	defer out.Close()
 	if err != nil {
 		fmt.Printf("Error: %v\n", err.Error())
