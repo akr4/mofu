@@ -2,6 +2,12 @@
 
 A tool makes I18N strings files for multiple platforms from a definition file.
 
+## Supported output formats
+- Java Properties
+- iOS/macOS Strings
+- Android Strings XML
+- JSON (can be used with Polygot for example)
+
 ## Prepare Definition File
 
 ```yaml
